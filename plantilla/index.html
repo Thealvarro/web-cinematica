@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self'; media-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>MARCA · Título de la página</title>
+  <meta name="description" content="Una frase que resuma la historia de la página.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@300;600;900&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+  <!-- Cargador. Con música, al terminar de cargar ofrece entrar con o sin sonido. -->
+  <div class="cargador" id="cargador">
+    <span class="marca">MARCA</span>
+    <span class="cargador-barra" aria-hidden="true"><span id="cargador-avance"></span></span>
+    <div class="cargador-entrar">
+      <button class="cta" id="entrar-con-sonido" type="button">Entrar con sonido</button>
+      <button class="enlace" id="entrar-sin-sonido" type="button">Entrar sin sonido</button>
+    </div>
+  </div>
+
+  <header class="barra">
+    <a class="marca" href="#inicio">MARCA</a>
+    <span class="barra-detalle">Producto 2026</span>
+    <a class="barra-cta" href="#cierre">Acción</a>
+  </header>
+
+  <div class="progreso" aria-hidden="true"><span id="progreso"></span></div>
+
+  <button class="sonido" id="sonido" type="button" aria-pressed="false" aria-label="Activar o silenciar la música" hidden>
+    <span></span><span></span><span></span><span></span>
+  </button>
+
+  <!-- Índice de capítulos. data-ir debe calzar con un data-capitulo de la página. -->
+  <nav class="capitulos" aria-label="Capítulos">
+    <a href="#inicio" data-ir="inicio"><span>01</span> Apertura</a>
+    <a href="#origen" data-ir="origen"><span>02</span> Origen</a>
+    <a href="#parte-a" data-ir="parte-a"><span>03</span> Parte A</a>
+    <a href="#parte-b" data-ir="parte-b"><span>04</span> Parte B</a>
+    <a href="#cifras" data-ir="cifras"><span>05</span> Cifras</a>
+  </nav>
+
+  <main>
+
+    <!-- ESCENA DE APERTURA. Cada .beat aparece mientras el avance de la escena
+         está entre data-desde y data-hasta (0 = recién llega, 1 = termina). -->
+    <section class="scrub apertura" id="inicio" data-capitulo="inicio" data-escena="apertura">
+      <div class="escena">
+        <canvas></canvas>
+        <div class="velo"></div>
+        <div class="beat centro" data-desde="0" data-hasta="0.34">
+          <p class="kicker">Marca · Producto</p>
+          <h1 class="titulo">La frase que<br>abre la historia.</h1>
+          <p class="pista">Baja para comenzar</p>
+        </div>
+        <div class="beat izq abajo" data-desde="0.42" data-hasta="0.72">
+          <h2 class="subtitulo">Segunda idea.</h2>
+        </div>
+        <div class="beat der abajo" data-desde="0.8" data-hasta="1.01">
+          <h2 class="subtitulo">Tercera idea.<br><em>Con remate.</em></h2>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN QUIETA. Da un respiro entre escenas. data-p mueve la foto y el número con el scroll. -->
+    <section class="respiro" id="origen" data-capitulo="origen" data-p>
+      <div class="respiro-foto">
+        <img src="assets/img/foto-1.jpg" alt="Describe la foto" loading="lazy" width="1600" height="900">
+      </div>
+      <div class="respiro-texto">
+        <p class="numero-fondo">2026</p>
+        <p class="kicker">Capítulo 02 · Origen</p>
+        <h2 class="subtitulo">De dónde viene.</h2>
+        <p>Dos o tres frases que cuentan el origen. Cortas, concretas y con un dato que se recuerde.</p>
+        <p class="destacado">Una frase de cierre.</p>
+      </div>
+    </section>
+
+    <!-- ESCENA LARGA. Varios videos encadenados en un solo plano.
+         Las .ancla marcan dónde parte cada capítulo dentro de la escena (data-en, de 0 a 1). -->
+    <section class="scrub" data-escena="relato">
+      <span class="ancla" id="parte-a" data-capitulo="parte-a" data-en="0"></span>
+      <span class="ancla" id="parte-b" data-capitulo="parte-b" data-en="0.5"></span>
+      <div class="escena">
+        <canvas></canvas>
+        <div class="velo suave"></div>
+        <div class="beat izq arriba" data-desde="0" data-hasta="0.2">
+          <p class="kicker">Capítulo 03 · Parte A</p>
+          <h2 class="titulo">Título corto.</h2>
+        </div>
+        <div class="beat der abajo" data-desde="0.25" data-hasta="0.45">
+          <h2 class="subtitulo">Un detalle.</h2>
+          <p class="bajada">Una frase que explica lo que se está viendo.</p>
+        </div>
+        <div class="beat izq arriba" data-desde="0.55" data-hasta="0.75">
+          <p class="kicker">Capítulo 04 · Parte B</p>
+          <h2 class="subtitulo">Otro momento.</h2>
+        </div>
+        <div class="beat centro arriba" data-desde="0.82" data-hasta="1.01">
+          <h2 class="titulo">El remate.</h2>
+        </div>
+      </div>
+    </section>
+
+    <!-- CIFRAS. data-cuenta es el número final; data-decimales, cuántos decimales. -->
+    <section class="cifras-seccion" id="cifras" data-capitulo="cifras">
+      <p class="kicker">Capítulo 05 · Cifras</p>
+      <h2 class="titulo">Los números. <em>Sin rodeos.</em></h2>
+      <div class="cifras">
+        <div class="cifra"><span class="cifra-num" data-cuenta="3.4" data-decimales="1">0</span><span class="cifra-uni">s</span><p>qué significa</p></div>
+        <div class="cifra"><span class="cifra-num" data-cuenta="520">0</span><span class="cifra-uni">km</span><p>qué significa</p></div>
+        <div class="cifra"><span class="cifra-num" data-cuenta="98">0</span><span class="cifra-uni">%</span><p>qué significa</p></div>
+        <div class="cifra"><span class="cifra-num" data-cuenta="18">0</span><span class="cifra-uni">min</span><p>qué significa</p></div>
+      </div>
+    </section>
+
+    <!-- CIERRE. El botón lleva a un link real: WhatsApp, agenda o tienda. Nada de formularios sin backend. -->
+    <section class="cierre" id="cierre" data-capitulo="cifras">
+      <h2 class="titulo">La invitación final.</h2>
+      <a class="cta" href="https://wa.me/56900000000" target="_blank" rel="noopener noreferrer">Texto del botón</a>
+    </section>
+
+  </main>
+
+  <footer class="pie">
+    <p>Imágenes y videos generados con IA.</p>
+    <p class="credito">Hecho con <a href="https://alvarocofre.dev/web-cinematica" target="_blank" rel="noopener noreferrer">web-cinematica</a></p>
+  </footer>
+
+  <script src="guion.js"></script>
+  <script src="motor.js"></script>
+</body>
+</html>
